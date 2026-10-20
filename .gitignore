@@ -1,0 +1,80 @@
+# Private data and manifests
+/train/
+/val/
+/test/
+/labels/
+/reports/**
+!/reports/PHASE_3_ENGINEERING_SUMMARY.md
+/PROJECT_AUDIT.md
+/PHASE_1_DATASET_FINDINGS.md
+**/*.csv
+!/data/schema.example.csv
+
+# Images are private unless specifically approved and reviewed.
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.webp
+**/*.gif
+**/*.bmp
+**/*.tif
+**/*.tiff
+**/*.JPG
+**/*.JPEG
+**/*.PNG
+**/*.WEBP
+**/*.GIF
+**/*.BMP
+**/*.TIF
+**/*.TIFF
+# No approved image fixtures exist yet; tests generate synthetic images in temp dirs.
+
+# Unreviewed notebooks and legacy scripts
+**/*.ipynb
+/scripts/Conversion_Script.py
+/scripts/Split_Dataset.py
+
+# Models, serialized objects and outputs
+**/*.h5
+**/*.hdf5
+**/*.keras
+**/*.ckpt*
+**/*.pb
+**/*.onnx
+**/*.tflite
+**/*.pt
+**/*.pth
+**/*.pkl
+**/*.pickle
+**/*.npz
+**/*.npy
+**/*.zip
+**/*.tar
+**/*.gz
+outputs/
+predictions/
+uploads/
+temporary_uploads/
+features/
+embeddings/
+*.log
+.coverage
+htmlcov/
+
+# Secrets and local environments
+.env*
+**/*.pem
+**/*.key
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.DS_Store
+
+# Public release: exclude all remaining data artifacts
+/data/*
+!/data/schema.example.csv

@@ -1,0 +1,7 @@
+# Model card — historical baseline, not a released model
+
+Intended research outputs are skin-type category, visible acne-like features, periorbital darkening, and a numeric age-related target only if its meaning is verified. None is currently available for use. The historical baseline and a new randomly initialized, untrained four-head ResNet50 implementation are described in MODEL_ARCHITECTURE.md; no local checkpoint has been verified or loaded. No reliable performance metrics or deployment claims are available.
+
+In one external macOS ARM64 environment using TensorFlow 2.16.2 and Keras 3.3.3, all 47 synthetic tests passed. The checks exercise model structure and a zero-input forward pass, preprocessing equivalence, selected masked-loss and gradient cases, and a safe uncompiled synthetic model load. They do not establish predictive performance, full numerical round-trip equivalence, or historical checkpoint compatibility. The implementation is not trained or fit for inference.
+
+This is not a medical device and must not be used for diagnosis, treatment, or decisions about individuals. Unknown data rights, label coverage, age semantics, duplicated splits, possible demographic bias and unverified preprocessing prevent evaluation and release. Future reporting must include dataset provenance, independently grouped evaluation, subgroup limitations, uncertainty and intended-use boundaries.
