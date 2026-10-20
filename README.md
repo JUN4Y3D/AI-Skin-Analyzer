@@ -1,5 +1,11 @@
 # AI Skin Analyzer 2.0
 
+
+![AI Skin Analyzer 2.0 — Landing Page](docs/assets/landing-page.png)
+
+*The application landing page. No private facial photographs or model predictions are shown.*
+
+
 A polished, local-first computer-vision application for exploring experimental facial-skin image signals. It combines camera capture, secure upload handling, automatic single-face cropping, deterministic photo-quality feedback, and four honestly described fitted components in one responsive browser experience.
 
 > **Research prototype—not a medical device.** The application does not diagnose acne, detect dark circles, measure skin physiology, establish a person's age, or recommend treatment or products.

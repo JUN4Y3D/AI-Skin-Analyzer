@@ -78,3 +78,7 @@ dist/
 # Public release: exclude all remaining data artifacts
 /data/*
 !/data/schema.example.csv
+
+# Approved public portfolio screenshot
+!/docs/assets/
+!/docs/assets/landing-page.png
