@@ -99,7 +99,10 @@ def load_artifacts(project_root: Path, skin_run: str, components_run: str) -> Ar
         source = root / relative
         if source.is_file() and not source.is_symlink():
             actual = sha256(_regular_file(source, "private provenance file"))
-        elif os.environ.get("AI_SKIN_HOSTED_INFERENCE") == "1":
+        elif (
+            os.environ.get("AI_SKIN_HOSTED_INFERENCE") == "1"
+            or (root / "reports/private/hosted_provenance_sha256.json").is_file()
+        ):
             if attestations is None:
                 proof = _regular_file(root / "reports/private/hosted_provenance_sha256.json", "hosted provenance attestation")
                 attestations = json.loads(proof.read_text(encoding="utf-8"))

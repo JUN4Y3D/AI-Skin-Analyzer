@@ -87,3 +87,4 @@ dist/
 /web/public/
 # Never stage the private backend transfer directory
 /ai-skin-hosted-private*/
+.vercel

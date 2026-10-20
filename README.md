@@ -42,13 +42,13 @@ Missing negatives in the historical acne and dark-circle labels make binary dete
 
 ## Exploratory model background
 
-The private fitted artifacts are not part of the public source package. In the private development workspace:
+The trained inference artifacts are distributed separately through GitHub Releases and are not committed to the source repository. In the private development workspace:
 
 - the Phase 6K skin-type model recorded approximately **78.90% accuracy on 109 repeatedly examined development images**;
 - the Phase 6L age-like component recorded **5.136 MAE in provisional label units**, versus a constant-mean baseline MAE of **6.553**;
 - the positive-reference development coverage was approximately **96.0% for acne references** and **88.3% for dark-circle references**.
 
-These are exploratory development results—not independent test performance, clinical accuracy, or evidence of real-world reliability. Trained artifacts remain private because underlying data rights and consent are unresolved.
+These are exploratory development results—not independent test performance, clinical accuracy, or evidence of real-world reliability. The model release does not establish clinical validity or independently verify the provenance of the original training dataset.
 
 ## Architecture
 
@@ -90,6 +90,22 @@ AI_Skin_Analyzer/
 ```
 
 Legacy notebooks, scripts, datasets, labels, private reports, models, feature stores, and local face photographs are preserved but excluded by `.gitignore`.
+
+## Run from a fresh GitHub clone
+
+Clone this repository using the GitHub Code menu. Python 3.12 is required.
+
+```bash
+cd AI-Skin-Analyzer
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[ml,app]"
+python scripts/download_models.py
+python scripts/run_app.py --check
+python scripts/run_app.py
+```
+
+The downloader fetches the trained models from the models-v1 GitHub Release and verifies their SHA-256 checksum. The release must be published before downloads work. The local application does not require Railway or Vercel. A fresh-clone installation has not yet been independently tested.
 
 ## Verified environment
 
@@ -176,13 +192,13 @@ Tests generate images in memory or temporary directories. They do not open the l
 - Blur and brightness checks use transparent thresholds, not scientifically validated photographic grading.
 - Automatic face cropping changes the fitted input distribution because the models were developed largely with full-image preprocessing. It is explicitly experimental and is not claimed to improve accuracy.
 - Camera capture has not been claimed for browsers or devices outside the tested local macOS context.
-- Model artifacts and positive-reference embeddings are intentionally not distributable with the source repository.
+- Model artifacts and positive-reference embeddings are distributed separately through the versioned GitHub Release, not through Git commits.
 
 Read [MODEL_LIMITATIONS.md](docs/MODEL_LIMITATIONS.md) before interpreting any result.
 
 ## Portfolio release policy
 
-Publish source code, synthetic tests, schemas, and documentation only. Do not publish facial images or original filenames; datasets, labels, manifests, or review records; trained checkpoints or fitted embeddings; private metrics/provenance files; session URLs or local tokens; or screenshots containing participant or user images.
+Publish source code, synthetic tests, schemas, and documentation in Git. Distribute only the explicitly authorized seven-file inference package through GitHub Releases, not Git history. Keep original facial images, datasets, source labels, review records, private manifests, credentials, session tokens, and user-image screenshots out of public releases. The model package contains fitted reference embeddings and metadata; permission to redistribute these artifacts does not establish clinical validity or independently verify the original dataset provenance.
 
 The release scanner is a screening aid—not legal or privacy approval:
 
@@ -203,4 +219,4 @@ This working directory is expected to fail a whole-tree release scan because it 
 
 ## Hosted deployment (optional)
 
-A public Vercel frontend with a separate private-model Railway inference service is documented in [Hosted deployment](docs/HOSTED_DEPLOYMENT.md). This mode sends photos to a remote server and has different privacy implications than the localhost application; it requires securely provisioning privately held model weights. The public source repository does not include model artifacts.
+A public Vercel frontend with a separate private-model Railway inference service is documented in [Hosted deployment](docs/HOSTED_DEPLOYMENT.md). This mode sends photos to a remote server and has different privacy implications than the localhost application; it requires securely provisioning privately held model weights. The source repository does not commit model artifacts; local users download them separately from GitHub Releases.
