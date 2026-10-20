@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -93,8 +94,22 @@ def load_artifacts(project_root: Path, skin_run: str, components_run: str) -> Ar
         ("reports/private/phase6d_review_purged_skin_type_manifest.csv", "manifest_sha256", "input_manifest_sha256"),
         ("reports/private/phase6c_candidate_derivative_review.csv", "review_csv_sha256", "input_review_sha256"),
     )
+    attestations = None
     for relative, skin_key, component_key in provenance:
-        actual = sha256(_regular_file(root / relative, "private provenance file"))
+        source = root / relative
+        if source.is_file() and not source.is_symlink():
+            actual = sha256(_regular_file(source, "private provenance file"))
+        elif os.environ.get("AI_SKIN_HOSTED_INFERENCE") == "1":
+            if attestations is None:
+                proof = _regular_file(root / "reports/private/hosted_provenance_sha256.json", "hosted provenance attestation")
+                attestations = json.loads(proof.read_text(encoding="utf-8"))
+                if not isinstance(attestations, dict) or set(attestations) != {entry[0] for entry in provenance}:
+                    raise ValueError("Invalid hosted provenance attestation")
+            actual = attestations.get(relative)
+            if not isinstance(actual, str) or len(actual) != 64:
+                raise ValueError("Invalid hosted provenance digest")
+        else:
+            raise ValueError("Missing or unsafe private provenance file")
         if actual != skin_metrics.get(skin_key) or actual != component_metrics.get(component_key):
             raise ValueError("Dataset provenance changed since model fitting")
 

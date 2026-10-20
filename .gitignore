@@ -82,3 +82,8 @@ dist/
 # Approved public portfolio screenshot
 !/docs/assets/
 !/docs/assets/landing-page.png
+
+# Generated hosted frontend output
+/web/public/
+# Never stage the private backend transfer directory
+/ai-skin-hosted-private*/

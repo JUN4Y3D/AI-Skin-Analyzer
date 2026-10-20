@@ -1,0 +1,10 @@
+reports/
+train/
+val/
+test/
+labels/
+data/
+*.keras
+*.npz
+*.npy
+*.h5

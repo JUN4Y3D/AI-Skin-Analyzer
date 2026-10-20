@@ -200,3 +200,7 @@ This working directory is expected to fail a whole-tree release scan because it 
 - Calibrate model scores only after suitable validation data exists.
 - Replace Haar-cascade detection only after evaluating a local, redistribution-cleared alternative.
 - Add automated cross-browser camera tests without collecting real user imagery.
+
+## Hosted deployment (optional)
+
+A public Vercel frontend with a separate private-model Railway inference service is documented in [Hosted deployment](docs/HOSTED_DEPLOYMENT.md). This mode sends photos to a remote server and has different privacy implications than the localhost application; it requires securely provisioning privately held model weights. The public source repository does not include model artifacts.
