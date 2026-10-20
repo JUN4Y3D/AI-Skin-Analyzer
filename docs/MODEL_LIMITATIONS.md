@@ -38,4 +38,4 @@ OpenCV Haar-cascade detection is heuristic. It can miss faces and detect nonface
 
 ## Distribution limitations
 
-The trained checkpoint, fitted age parameters, positive-reference embeddings, source manifests, and datasets remain private. The public portfolio should distribute only source code, synthetic tests, schemas, and documentation until rights and consent are affirmatively resolved.
+The authorized trained checkpoint, fitted age parameters, and positive-reference embeddings are distributed separately through the versioned GitHub model release, not through Git history. Original facial photographs, source manifests, datasets, and review records remain excluded. Permission to redistribute the inference package does not establish clinical validity or independently verify the original dataset provenance.
